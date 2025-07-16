@@ -26,3 +26,8 @@
 # 1.0.1
 
 - remove screenshots 
+
+# 1.0.2
+
+- Removed screenshots from package configuration to resolve pub.dev publishing issues.
+- Updated CHANGELOG to reflect recent fixes.
