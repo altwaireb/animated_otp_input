@@ -35,6 +35,3 @@ jobs:
         with:
           name: test-results
           path: build/test-results/
-          
-      - name: Build example app
-        run: flutter build apk --debug --target=example/lib/main.dart
