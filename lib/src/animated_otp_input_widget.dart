@@ -392,14 +392,16 @@ class _AnimatedOtpInputState extends State<AnimatedOtpInput>
                                 ),
                               ),
                           enabledBorder: fieldErrors[i]
-                              ? OutlineInputBorder(
-                                  borderRadius: widget.theme.borderRadius ??
-                                      BorderRadius.circular(8),
-                                  borderSide: BorderSide(
-                                    color: Theme.of(context).colorScheme.error,
-                                    width: widget.theme.borderSideWidth,
-                                  ),
-                                )
+                              ? (widget.theme.errorBorder ??
+                                  OutlineInputBorder(
+                                    borderRadius: widget.theme.borderRadius ??
+                                        BorderRadius.circular(8),
+                                    borderSide: BorderSide(
+                                      width: widget.theme.borderSideWidth,
+                                      color:
+                                          Theme.of(context).colorScheme.error,
+                                    ),
+                                  ))
                               : widget.theme.border ??
                                   OutlineInputBorder(
                                     borderRadius: widget.theme.borderRadius ??

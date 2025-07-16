@@ -39,3 +39,14 @@
 # 1.0.4
 
 - Added comprehensive usage examples in example/example.dart
+
+# 1.0.5
+
+### Added
+- Comprehensive usage examples in `example/lib/main.dart` for better documentation and pub.dev score
+
+### Changed
+- Custom `errorBorder` from `OtpInputTheme` is now correctly applied to the enabled border when a field is in error, allowing full theming of error states.
+
+### Removed
+- Deleted previous example in `example/example.dart`

@@ -1,14 +1,5 @@
-import 'package:animated_otp_input_example/examples/accessibility_example.dart';
-import 'package:animated_otp_input_example/examples/animation_customization_example.dart';
-import 'package:animated_otp_input_example/examples/error_indication_example.dart';
-import 'package:animated_otp_input_example/examples/error_message_example.dart';
-import 'package:animated_otp_input_example/examples/paste_handling_example.dart';
 import 'package:flutter/material.dart';
-import 'examples/basic_example.dart';
-import 'examples/themed_example.dart';
-import 'examples/obscure_example.dart';
-import 'examples/disabled_example.dart';
-import 'examples/autofocus_example.dart';
+import 'package:animated_otp_input/animated_otp_input.dart';
 
 void main() {
   runApp(const ExampleApp());
@@ -23,7 +14,7 @@ class ExampleApp extends StatelessWidget {
       title: 'Animated OTP Input Examples',
       theme: ThemeData(useMaterial3: true, brightness: Brightness.light),
       darkTheme: ThemeData(useMaterial3: true, brightness: Brightness.dark),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: const ExampleMenu(),
     );
   }
@@ -34,42 +25,163 @@ class ExampleMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('OTP Input Examples')),
-      body: ListView(
-        children: const [
-          _ExampleTile(title: 'Basic', child: BasicExample()),
-          _ExampleTile(title: 'Themed', child: ThemedExample()),
-          _ExampleTile(title: 'Obscure', child: ObscureExample()),
-          _ExampleTile(title: 'Disabled', child: DisabledExample()),
-          _ExampleTile(title: 'Autofocus', child: AutofocusExample()),
-          _ExampleTile(title: 'Accessibility', child: AccessibilityExample()),
-          _ExampleTile(title: 'Paste Handling', child: PasteHandlingExample()),
-          _ExampleTile(
-              title: 'Error Indication', child: ErrorIndicationExample()),
-          _ExampleTile(title: 'Error Message', child: ErrorMessageExample()),
-          _ExampleTile(
-              title: 'Animation Customization',
-              child: AnimationCustomizationExample()),
-        ],
-      ),
-    );
-  }
-}
-
-class _ExampleTile extends StatelessWidget {
-  final String title;
-  final Widget child;
-  const _ExampleTile({required this.title, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => child),
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Animated OTP Input Example')),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    'Basic OTP Input',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Basic usage
+                AnimatedOtpInput(
+                  length: 6,
+                  onChanged: (otp) {
+                    debugPrint('Entered OTP: $otp');
+                  },
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Basic OTP Input',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                AnimatedOtpInput(
+                  length: 4,
+                  fieldSpacing: 12,
+                  theme: OtpInputTheme(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.blue.shade700, width: 2),
+                        borderRadius: BorderRadius.circular(100)),
+                    fillColor: Colors.blue.shade100,
+                    textStyle:
+                        const TextStyle(fontSize: 22, color: Colors.black87),
+                  ),
+                  onChanged: (otp) => debugPrint('OTP: $otp'),
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Error message',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Error message example
+                AnimatedOtpInput(
+                  length: 4,
+                  errorMessage: 'Please fill all fields',
+                  theme: const OtpInputTheme(
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    errorMessageStyle: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  onChanged: (otp) {},
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Animation Customization',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                AnimatedOtpInput(
+                  length: 6,
+                  theme: const OtpInputTheme(
+                    focusedScale: 1.2,
+                    animationDuration: Duration(milliseconds: 400),
+                    animationCurve: Curves.elasticOut,
+                  ),
+                  onChanged: (otp) {},
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Obscured Input',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Obscured input example
+                AnimatedOtpInput(
+                  length: 4,
+                  obscureText: true,
+                  obscureCharacter: '*',
+                  onChanged: (otp) {},
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Disabled input',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Disabled input example
+                AnimatedOtpInput(
+                  length: 4,
+                  enabled: false,
+                  onChanged: (otp) {},
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Accessibility customization',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Accessibility customization
+                AnimatedOtpInput(
+                  length: 4,
+                  semanticsLabel: 'Verification digit',
+                  semanticsHint: 'Enter the digit for verification',
+                  onChanged: (otp) {},
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    'Haptic feedback customization',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Haptic feedback customization
+                AnimatedOtpInput(
+                  length: 4,
+                  enableSuccessHaptic: true,
+                  enableErrorHaptic: true,
+                  successHapticFeedback: OtpHapticType.medium,
+                  errorHapticFeedback: OtpHapticType.vibrate,
+                  onChanged: (otp) {},
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
