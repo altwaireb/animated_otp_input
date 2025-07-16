@@ -1,6 +1,6 @@
 name: animated_otp_input
 description: A customizable, animated, and accessible OTP input widget for Flutter with advanced theming, error handling, and paste detection.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/altwaireb/animated_otp_input
 repository: https://github.com/altwaireb/animated_otp_input
 issue_tracker: https://github.com/altwaireb/animated_otp_input/issues
@@ -9,16 +9,8 @@ topics:
 - otp
 - input
 - pin
-- verification
 - authentication
 - flutter
-- widget
-- ui
-- animation
-- accessibility
-- form
-- code
-- password
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
