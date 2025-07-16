@@ -22,3 +22,7 @@
 # 1.0.1
 
 - fix demo image
+
+# 1.0.1
+
+- remove screenshots 
