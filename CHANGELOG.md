@@ -35,3 +35,7 @@
 # 1.0.3
 
 - Limit topics to 5 for pub.dev compliance
+
+# 1.0.4
+
+- Added comprehensive usage examples in example/example.dart
