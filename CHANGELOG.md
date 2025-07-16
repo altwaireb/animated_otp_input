@@ -31,3 +31,7 @@
 
 - Removed screenshots from package configuration to resolve pub.dev publishing issues.
 - Updated CHANGELOG to reflect recent fixes.
+
+# 1.0.3
+
+- Limit topics to 5 for pub.dev compliance
