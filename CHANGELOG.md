@@ -17,3 +17,8 @@
 - Haptic feedback: Optionally trigger haptic feedback on success or error, with customizable feedback type and intensity.
 - Accessibility: Consistent left-to-right layout for digit entry, even in RTL locales.
 - Comprehensive widget tests: Includes tests for error indication, error message display, custom error styles, accessibility, animation, haptic feedback, and more.
+
+
+# 1.0.1
+
+- fix demo image
