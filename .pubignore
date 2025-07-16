@@ -1,0 +1,12 @@
+.git/
+.github/
+.vscode/
+.idea/
+test/
+example/
+build/
+.dart_tool/
+.DS_Store
+*.iml
+*.ipr
+*.iws
