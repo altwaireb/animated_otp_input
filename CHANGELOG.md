@@ -50,3 +50,9 @@
 
 ### Removed
 - Deleted previous example in `example/example.dart`
+
+
+# 1.0.6
+
+### Changed
+- Added `.gitattributes` to mark native desktop folders as vendored, so GitHub language stats show Dart as the primary language.

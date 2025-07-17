@@ -38,7 +38,7 @@ Or manually add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  animated_otp_input: ^1.0.5
+  animated_otp_input: ^1.0.6
 ```
 
 Then run:

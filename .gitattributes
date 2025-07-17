@@ -1,0 +1,4 @@
+# Tell linguist to ignore all desktop runner code
+/linux/** linguist-vendored
+/windows/** linguist-vendored
+/macos/** linguist-vendored
