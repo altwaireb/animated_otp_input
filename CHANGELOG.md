@@ -1,3 +1,8 @@
+# 1.0.7
+
+### Changed
+- Updated `flutter_lints` from `^3.0.0` to `^6.0.0`.
+- Replaced the named library declaration with the unnamed `library;` declaration to maintain lint compliance.
 ## 1.0.0
 
 - Initial stable release of `animated_otp_input`.
