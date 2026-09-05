@@ -1,4 +1,10 @@
-# Tell linguist to ignore all desktop runner code
-/linux/** linguist-vendored
-/windows/** linguist-vendored
-/macos/** linguist-vendored
+# Tell GitHub Linguist to ignore Flutter platform runner code
+/example/android/** linguist-generated=true
+/example/ios/** linguist-generated=true
+/example/linux/** linguist-generated=true
+/example/macos/** linguist-generated=true
+/example/web/** linguist-generated=true
+/example/windows/** linguist-generated=true
+
+# Ignore generated Dart tooling files
+/example/.dart_tool/** linguist-generated=true

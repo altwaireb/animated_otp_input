@@ -10,12 +10,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        include:
+          - label: '3.32.x'
+            flutter-version: '3.32.x'
+            use-latest: false
+          - label: 'latest'
+            use-latest: true
+
     steps:
       - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - name: Set up Flutter (minimum supported)
+        if: matrix.use-latest == false
+        uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x' # or your preferred version
+          channel: stable
+          flutter-version: ${{ matrix.flutter-version }}
+
+      - name: Set up Flutter (latest stable)
+        if: matrix.use-latest == true
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
 
       - name: Install dependencies
         run: flutter pub get
@@ -33,5 +51,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
+          name: test-results-${{ matrix.label }}
           path: build/test-results/
