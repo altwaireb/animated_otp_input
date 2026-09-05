@@ -12,13 +12,7 @@ import 'otp_input_theme.dart';
 /// - [heavy]: Triggers a heavy impact vibration, for strong and noticeable feedback is [HapticFeedback.heavyImpact].
 /// - [vibrate]: Triggers a standard device vibration, typically longer and more pronounced is [HapticFeedback.vibrate].
 /// - [none]: Disables haptic feedback for the event is.
-enum OtpHapticType {
-  light,
-  medium,
-  heavy,
-  vibrate,
-  none,
-}
+enum OtpHapticType { light, medium, heavy, vibrate, none }
 
 /// {@template animated_otp_input}
 /// # AnimatedOtpInput
@@ -308,144 +302,156 @@ class _AnimatedOtpInputState extends State<AnimatedOtpInput>
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(widget.length, (i) {
               return AnimatedScale(
-                  scale: fieldFocused[i]
-                      ? (widget.theme.focusedScale ?? 1.1)
-                      : 1.0,
-                  duration: widget.theme.animationDuration ??
-                      const Duration(milliseconds: 200),
-                  curve: widget.theme.animationCurve ?? Curves.easeInOut,
-                  child: Container(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: widget.fieldSpacing),
-                    width: widget.fieldWidth,
-                    child: Semantics(
-                      label: '${widget.semanticsLabel} ${i + 1}',
-                      hint: '${widget.semanticsHint} ${i + 1}',
+                scale: fieldFocused[i]
+                    ? (widget.theme.focusedScale ?? 1.1)
+                    : 1.0,
+                duration:
+                    widget.theme.animationDuration ??
+                    const Duration(milliseconds: 200),
+                curve: widget.theme.animationCurve ?? Curves.easeInOut,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: widget.fieldSpacing),
+                  width: widget.fieldWidth,
+                  child: Semantics(
+                    label: '${widget.semanticsLabel} ${i + 1}',
+                    hint: '${widget.semanticsHint} ${i + 1}',
+                    enabled: widget.enabled,
+                    textField: true,
+                    child: TextFormField(
+                      controller: controllers[i],
+                      focusNode: focusNodes[i],
                       enabled: widget.enabled,
-                      textField: true,
-                      child: TextFormField(
-                        controller: controllers[i],
-                        focusNode: focusNodes[i],
-                        enabled: widget.enabled,
-                        obscureText: widget.obscureText,
-                        obscuringCharacter: widget.obscureCharacter,
-                        autofocus: widget.autoFocusFirstField &&
-                            widget.enabled &&
-                            i == 0 &&
-                            MediaQuery.of(context).viewInsets.bottom == 0,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          if (i == 0)
-                            TextInputFormatter.withFunction(
-                                (oldValue, newValue) {
-                              final pasted = newValue.text;
-                              if (pasted.length == widget.length) {
-                                _handlePaste(pasted);
-                                return TextEditingValue(
-                                  text: pasted[0],
-                                  selection:
-                                      const TextSelection.collapsed(offset: 1),
-                                );
-                              }
-                              return newValue;
-                            }),
-                        ],
-                        keyboardType: TextInputType.number,
-                        textInputAction: i < widget.length - 1
-                            ? TextInputAction.next
-                            : TextInputAction.done,
-                        maxLength: 1,
-                        textAlign: TextAlign.center,
-                        style: widget.theme.textStyle ??
-                            Theme.of(context).textTheme.titleLarge,
-                        decoration: InputDecoration(
-                          counterText: '',
-                          filled: true,
-                          fillColor: widget.theme.fillColor ??
-                              Theme.of(context).colorScheme.surface,
-                          border: widget.theme.border ??
-                              OutlineInputBorder(
-                                borderRadius: widget.theme.borderRadius ??
-                                    BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                  width: widget.theme.borderSideWidth,
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface,
+                      obscureText: widget.obscureText,
+                      obscuringCharacter: widget.obscureCharacter,
+                      autofocus:
+                          widget.autoFocusFirstField &&
+                          widget.enabled &&
+                          i == 0 &&
+                          MediaQuery.of(context).viewInsets.bottom == 0,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        if (i == 0)
+                          TextInputFormatter.withFunction((oldValue, newValue) {
+                            final pasted = newValue.text;
+                            if (pasted.length == widget.length) {
+                              _handlePaste(pasted);
+                              return TextEditingValue(
+                                text: pasted[0],
+                                selection: const TextSelection.collapsed(
+                                  offset: 1,
                                 ),
+                              );
+                            }
+                            return newValue;
+                          }),
+                      ],
+                      keyboardType: TextInputType.number,
+                      textInputAction: i < widget.length - 1
+                          ? TextInputAction.next
+                          : TextInputAction.done,
+                      maxLength: 1,
+                      textAlign: TextAlign.center,
+                      style:
+                          widget.theme.textStyle ??
+                          Theme.of(context).textTheme.titleLarge,
+                      decoration: InputDecoration(
+                        counterText: '',
+                        filled: true,
+                        fillColor:
+                            widget.theme.fillColor ??
+                            Theme.of(context).colorScheme.surface,
+                        border:
+                            widget.theme.border ??
+                            OutlineInputBorder(
+                              borderRadius:
+                                  widget.theme.borderRadius ??
+                                  BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: widget.theme.borderSideWidth,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
-                          focusedBorder: widget.theme.focusedBorder ??
-                              OutlineInputBorder(
-                                borderRadius: widget.theme.borderRadius ??
-                                    BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                  width: widget.theme.borderSideWidth,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
+                            ),
+                        focusedBorder:
+                            widget.theme.focusedBorder ??
+                            OutlineInputBorder(
+                              borderRadius:
+                                  widget.theme.borderRadius ??
+                                  BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: widget.theme.borderSideWidth,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
-                          errorBorder: widget.theme.errorBorder ??
-                              OutlineInputBorder(
-                                borderRadius: widget.theme.borderRadius ??
-                                    BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                  width: widget.theme.borderSideWidth,
-                                  color: Theme.of(context).colorScheme.error,
-                                ),
+                            ),
+                        errorBorder:
+                            widget.theme.errorBorder ??
+                            OutlineInputBorder(
+                              borderRadius:
+                                  widget.theme.borderRadius ??
+                                  BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: widget.theme.borderSideWidth,
+                                color: Theme.of(context).colorScheme.error,
                               ),
-                          enabledBorder: fieldErrors[i]
-                              ? (widget.theme.errorBorder ??
+                            ),
+                        enabledBorder: fieldErrors[i]
+                            ? (widget.theme.errorBorder ??
                                   OutlineInputBorder(
-                                    borderRadius: widget.theme.borderRadius ??
+                                    borderRadius:
+                                        widget.theme.borderRadius ??
                                         BorderRadius.circular(8),
                                     borderSide: BorderSide(
                                       width: widget.theme.borderSideWidth,
-                                      color:
-                                          Theme.of(context).colorScheme.error,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.error,
                                     ),
                                   ))
-                              : widget.theme.border ??
+                            : widget.theme.border ??
                                   OutlineInputBorder(
-                                    borderRadius: widget.theme.borderRadius ??
+                                    borderRadius:
+                                        widget.theme.borderRadius ??
                                         BorderRadius.circular(8),
                                     borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurface,
                                       width: 1.0,
                                     ),
                                   ),
-                        ),
-                        onChanged: (value) {
-                          final fullOtp = controllers.map((c) => c.text).join();
-                          widget.onChanged?.call(fullOtp);
-                          setState(() {
-                            fieldErrors[i] = value.isEmpty;
-                          });
-
-                          // Success haptic: when last field is filled and all fields are non-empty
-                          if (value.isNotEmpty && i == widget.length - 1) {
-                            if (widget.enableSuccessHaptic == true &&
-                                controllers.every((c) => c.text.isNotEmpty)) {
-                              _triggerHaptic(widget.successHapticFeedback);
-                            }
-                            FocusScope.of(context).unfocus();
-                          }
-
-                          // Error haptic: when errorMessage is shown and any field is empty
-                          if (widget.errorMessage != null &&
-                              widget.enableErrorHaptic == true &&
-                              controllers.any((c) => c.text.isEmpty)) {
-                            _triggerHaptic(widget.errorHapticFeedback);
-                          }
-
-                          if (value.isNotEmpty && i < widget.length - 1) {
-                            focusNodes[i + 1].requestFocus();
-                          } else if (value.isEmpty && i > 0) {
-                            focusNodes[i - 1].requestFocus();
-                          }
-                        },
                       ),
+                      onChanged: (value) {
+                        final fullOtp = controllers.map((c) => c.text).join();
+                        widget.onChanged?.call(fullOtp);
+                        setState(() {
+                          fieldErrors[i] = value.isEmpty;
+                        });
+
+                        // Success haptic: when last field is filled and all fields are non-empty
+                        if (value.isNotEmpty && i == widget.length - 1) {
+                          if (widget.enableSuccessHaptic == true &&
+                              controllers.every((c) => c.text.isNotEmpty)) {
+                            _triggerHaptic(widget.successHapticFeedback);
+                          }
+                          FocusScope.of(context).unfocus();
+                        }
+
+                        // Error haptic: when errorMessage is shown and any field is empty
+                        if (widget.errorMessage != null &&
+                            widget.enableErrorHaptic == true &&
+                            controllers.any((c) => c.text.isEmpty)) {
+                          _triggerHaptic(widget.errorHapticFeedback);
+                        }
+
+                        if (value.isNotEmpty && i < widget.length - 1) {
+                          focusNodes[i + 1].requestFocus();
+                        } else if (value.isEmpty && i > 0) {
+                          focusNodes[i - 1].requestFocus();
+                        }
+                      },
                     ),
-                  ));
+                  ),
+                ),
+              );
             }),
           ),
         ),
@@ -454,7 +460,8 @@ class _AnimatedOtpInputState extends State<AnimatedOtpInput>
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               widget.errorMessage!,
-              style: widget.theme.errorMessageStyle ??
+              style:
+                  widget.theme.errorMessageStyle ??
                   TextStyle(
                     color: Theme.of(context).colorScheme.error,
                     fontSize: 12,

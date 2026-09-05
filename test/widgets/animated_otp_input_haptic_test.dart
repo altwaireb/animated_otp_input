@@ -39,28 +39,33 @@ void main() {
 
   // Test: triggers success haptic when all fields are filled
   // This test verifies that haptic feedback is triggered for success when all OTP fields are filled.
-  testWidgets('triggers success haptic when all fields are filled',
-      (tester) async {
+  testWidgets('triggers success haptic when all fields are filled', (
+    tester,
+  ) async {
     await overrideHaptics(tester);
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          enableSuccessHaptic: true,
-          successHapticFeedback: OtpHapticType.light,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AnimatedOtpInput(
+            length: 4,
+            enableSuccessHaptic: true,
+            successHapticFeedback: OtpHapticType.light,
+          ),
         ),
       ),
-    ));
+    );
 
     await fillAllFields(tester, 4);
 
     expect(
       hapticCalls,
-      anyElement(predicate<MethodCall>(
-        (call) => call.method == 'HapticFeedback.vibrate',
-        'Expected haptic feedback for success.',
-      )),
+      anyElement(
+        predicate<MethodCall>(
+          (call) => call.method == 'HapticFeedback.vibrate',
+          'Expected haptic feedback for success.',
+        ),
+      ),
     );
   });
 
@@ -69,15 +74,17 @@ void main() {
   testWidgets('does not trigger success haptic if disabled', (tester) async {
     await overrideHaptics(tester);
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          enableSuccessHaptic: false,
-          successHapticFeedback: OtpHapticType.light,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AnimatedOtpInput(
+            length: 4,
+            enableSuccessHaptic: false,
+            successHapticFeedback: OtpHapticType.light,
+          ),
         ),
       ),
-    ));
+    );
 
     await fillAllFields(tester, 4);
 
@@ -90,19 +97,22 @@ void main() {
 
   // Test: does not trigger haptic if successHapticFeedback is none
   // This test verifies that no haptic feedback is triggered when successHapticFeedback is set to none.
-  testWidgets('does not trigger haptic if successHapticFeedback is none',
-      (tester) async {
+  testWidgets('does not trigger haptic if successHapticFeedback is none', (
+    tester,
+  ) async {
     await overrideHaptics(tester);
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          enableSuccessHaptic: true,
-          successHapticFeedback: OtpHapticType.none,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AnimatedOtpInput(
+            length: 4,
+            enableSuccessHaptic: true,
+            successHapticFeedback: OtpHapticType.none,
+          ),
         ),
       ),
-    ));
+    );
 
     await fillAllFields(tester, 4);
 
@@ -116,48 +126,55 @@ void main() {
   // Test: triggers error haptic when fields are empty and errorMessage is shown
   // This test checks that error haptic feedback is triggered when an error message is shown and fields are empty.
   testWidgets(
-      'triggers error haptic when fields are empty and errorMessage is shown',
-      (tester) async {
-    await overrideHaptics(tester);
+    'triggers error haptic when fields are empty and errorMessage is shown',
+    (tester) async {
+      await overrideHaptics(tester);
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          errorMessage: 'Invalid OTP',
-          enableErrorHaptic: true,
-          errorHapticFeedback: OtpHapticType.heavy,
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: AnimatedOtpInput(
+              length: 4,
+              errorMessage: 'Invalid OTP',
+              enableErrorHaptic: true,
+              errorHapticFeedback: OtpHapticType.heavy,
+            ),
+          ),
         ),
-      ),
-    ));
+      );
 
-    await tester.enterText(find.byType(TextFormField).at(0), '1');
-    await tester.pump();
+      await tester.enterText(find.byType(TextFormField).at(0), '1');
+      await tester.pump();
 
-    expect(
-      hapticCalls,
-      anyElement(predicate<MethodCall>(
-        (call) => call.method == 'HapticFeedback.vibrate',
-        'Expected haptic feedback for error.',
-      )),
-    );
-  });
+      expect(
+        hapticCalls,
+        anyElement(
+          predicate<MethodCall>(
+            (call) => call.method == 'HapticFeedback.vibrate',
+            'Expected haptic feedback for error.',
+          ),
+        ),
+      );
+    },
+  );
 
   // Test: does not trigger error haptic if disabled
   // This test verifies that no error haptic feedback is triggered when enableErrorHaptic is false.
   testWidgets('does not trigger error haptic if disabled', (tester) async {
     await overrideHaptics(tester);
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          errorMessage: 'Invalid OTP',
-          enableErrorHaptic: false,
-          errorHapticFeedback: OtpHapticType.heavy,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AnimatedOtpInput(
+            length: 4,
+            errorMessage: 'Invalid OTP',
+            enableErrorHaptic: false,
+            errorHapticFeedback: OtpHapticType.heavy,
+          ),
         ),
       ),
-    ));
+    );
 
     await tester.enterText(find.byType(TextFormField).at(0), '1');
     await tester.pump();
@@ -171,20 +188,23 @@ void main() {
 
   // Test: does not trigger haptic if errorHapticFeedback is none
   // This test checks that no error haptic feedback is triggered when errorHapticFeedback is set to none.
-  testWidgets('does not trigger haptic if errorHapticFeedback is none',
-      (tester) async {
+  testWidgets('does not trigger haptic if errorHapticFeedback is none', (
+    tester,
+  ) async {
     await overrideHaptics(tester);
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          errorMessage: 'Invalid OTP',
-          enableErrorHaptic: true,
-          errorHapticFeedback: OtpHapticType.none,
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: AnimatedOtpInput(
+            length: 4,
+            errorMessage: 'Invalid OTP',
+            enableErrorHaptic: true,
+            errorHapticFeedback: OtpHapticType.none,
+          ),
         ),
       ),
-    ));
+    );
 
     await tester.enterText(find.byType(TextFormField).at(0), '1');
     await tester.pump();
@@ -199,33 +219,38 @@ void main() {
   // Test: triggers only success haptic when all fields are filled and error haptic is enabled
   // This test verifies that only success haptic feedback is triggered when all fields are filled, even if error haptic is enabled.
   testWidgets(
-      'triggers only success haptic when all fields are filled and error haptic is enabled',
-      (tester) async {
-    await overrideHaptics(tester);
+    'triggers only success haptic when all fields are filled and error haptic is enabled',
+    (tester) async {
+      await overrideHaptics(tester);
 
-    const hapticType = OtpHapticType.light;
-    const errorHapticType = OtpHapticType.vibrate;
+      const hapticType = OtpHapticType.light;
+      const errorHapticType = OtpHapticType.vibrate;
 
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(
-        body: AnimatedOtpInput(
-          length: 4,
-          enableSuccessHaptic: true,
-          successHapticFeedback: hapticType,
-          enableErrorHaptic: true,
-          errorHapticFeedback: errorHapticType,
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: AnimatedOtpInput(
+              length: 4,
+              enableSuccessHaptic: true,
+              successHapticFeedback: hapticType,
+              enableErrorHaptic: true,
+              errorHapticFeedback: errorHapticType,
+            ),
+          ),
         ),
-      ),
-    ));
+      );
 
-    await fillAllFields(tester, 4);
+      await fillAllFields(tester, 4);
 
-    expect(
-      hapticCalls.any((call) =>
-          call.method == 'HapticFeedback.vibrate' &&
-          call.arguments == 'HapticFeedbackType.vibrate'),
-      isFalse,
-      reason: 'Error haptic should not be triggered on success.',
-    );
-  });
+      expect(
+        hapticCalls.any(
+          (call) =>
+              call.method == 'HapticFeedback.vibrate' &&
+              call.arguments == 'HapticFeedbackType.vibrate',
+        ),
+        isFalse,
+        reason: 'Error haptic should not be triggered on success.',
+      );
+    },
+  );
 }
