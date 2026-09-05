@@ -9,7 +9,7 @@
 ///   },
 /// );
 /// ```
-library animated_otp_input;
+library;
 
 export 'src/animated_otp_input_widget.dart';
 export 'src/otp_input_theme.dart';
