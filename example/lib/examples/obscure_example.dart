@@ -16,9 +16,7 @@ class ObscureExample extends StatelessWidget {
               length: 5,
               fieldWidth: 50,
               fieldSpacing: 8,
-              theme: OtpInputTheme(
-                borderRadius: BorderRadius.circular(18),
-              ),
+              theme: OtpInputTheme(borderRadius: BorderRadius.circular(18)),
               obscureText: true,
               obscureCharacter: '*',
               onChanged: (otp) => debugPrint('Hidden OTP: $otp'),

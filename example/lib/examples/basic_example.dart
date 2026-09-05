@@ -20,8 +20,11 @@ class BasicExample extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              child: Icon(Icons.security_outlined,
-                  size: 60, color: Theme.of(context).colorScheme.onPrimary),
+              child: Icon(
+                Icons.security_outlined,
+                size: 60,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
             ),
             const SizedBox(height: 30),
             const Text(

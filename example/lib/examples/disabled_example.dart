@@ -11,11 +11,7 @@ class DisabledExample extends StatelessWidget {
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedOtpInput(
-              enabled: false,
-            ),
-          ],
+          children: [AnimatedOtpInput(enabled: false)],
         ),
       ),
     );

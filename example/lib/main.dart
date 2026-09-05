@@ -64,14 +64,20 @@ class ExampleMenu extends StatelessWidget {
                   fieldSpacing: 12,
                   theme: OtpInputTheme(
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.blue.shade700, width: 2),
-                        borderRadius: BorderRadius.circular(100)),
+                      borderSide: BorderSide(
+                        color: Colors.blue.shade700,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                     fillColor: Colors.blue.shade100,
-                    textStyle:
-                        const TextStyle(fontSize: 22, color: Colors.black87),
+                    textStyle: const TextStyle(
+                      fontSize: 22,
+                      color: Colors.black87,
+                    ),
                   ),
                   onChanged: (otp) => debugPrint('OTP: $otp'),
                 ),

@@ -12,12 +12,7 @@ class AccessibilityExample extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AnimatedOtpInput(
-              length: 6,
-              onChanged: (otp) {},
-            ),
-          ],
+          children: [AnimatedOtpInput(length: 6, onChanged: (otp) {})],
         ),
       ),
     );
