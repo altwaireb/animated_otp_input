@@ -39,6 +39,7 @@ jobs:
         run: flutter pub get
 
       - name: Format check
+        if: matrix.use-latest == true
         run: dart format --set-exit-if-changed .
 
       - name: Analyze
